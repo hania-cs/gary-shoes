@@ -1,0 +1,11 @@
+# Tasks
+- [x] Allow multiple additional category selections when creating and editing products; tests verify independent selections and retention while editing.
+- [x] Widen hero text without changing the photo; remove editorial labels/numbers and align View all beside Shop the edit.
+- [x] Refine only the three Gary Edit sections and Family philosophy section, preserving content and alternation.
+- [x] Verify full shoe visibility, accessible links, reduced motion, and desktop/tablet/mobile layouts.
+- [x] Change product photo displays to square frames.
+- [x] Prepare the four uploaded photos at 1090 × 1090 and add preview products to Heels.
+- [x] Verify catalog and product gallery previews.
+- [x] Replace homepage sections below categories with the approved editorial layout.
+- [x] Remove Instagram Shop while keeping hero and categories unchanged.
+- [x] Verify section links, images, and page layout.

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789149121523,
+      "tag": "0000_add_sale_price_to_products",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792060316890,
+      "tag": "0001_extend_admin_session_inactivity",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792067051032,
+      "tag": "0002_product_extra_categories",
+      "breakpoints": true
+    }
+  ]
+}

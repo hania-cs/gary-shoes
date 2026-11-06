@@ -1,0 +1,1 @@
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS extra_categories text[] NOT NULL DEFAULT '{}'::text[];

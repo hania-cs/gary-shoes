@@ -1,0 +1,1654 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 38 30% 96%;
+    --foreground: 30 10% 12%;
+
+    --card: 38 25% 94%;
+    --card-foreground: 30 10% 12%;
+
+    --popover: 38 30% 96%;
+    --popover-foreground: 30 10% 12%;
+
+    --primary: 30 10% 12%;
+    --primary-foreground: 38 30% 96%;
+
+    --secondary: 35 25% 88%;
+    --secondary-foreground: 30 10% 12%;
+
+    --muted: 35 20% 90%;
+    --muted-foreground: 30 8% 45%;
+
+    --accent: 37 35% 78%;
+    --accent-foreground: 30 10% 12%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 30 10% 12%;
+
+    --radius: 0.25rem;
+
+    --sand: 37 35% 78%;
+    --sand-light: 38 30% 92%;
+    --sand-dark: 35 25% 65%;
+    --gold: 40 60% 50%;
+    --gold-light: 42 55% 70%;
+    --charcoal: 30 10% 12%;
+    --cream: 38 30% 96%;
+    --warm-gray: 30 8% 45%;
+    --editorial-ivory: 40 36% 96%;
+    --editorial-linen: 37 28% 92%;
+    --editorial-gold: 36 46% 34%;
+    --editorial-ink: 30 16% 27%;
+    --editorial-pedestal-top: 42 43% 98%;
+    --editorial-pedestal-base: 36 27% 88%;
+    --editorial-shadow: 30 20% 20%;
+    --editorial-tile-light:
+      radial-gradient(ellipse at 50% 38%, hsl(var(--cream) / 0.85), transparent 72%),
+      linear-gradient(180deg, hsl(var(--editorial-pedestal-top)), hsl(var(--editorial-pedestal-base)));
+    --editorial-tile-shadow: 0 5px 16px -8px hsl(var(--editorial-shadow) / 0.16);
+    --editorial-tile-shadow-hover: 0 12px 26px -12px hsl(var(--editorial-shadow) / 0.28);
+    --editorial-frame-shadow: 0 20px 38px -18px hsl(var(--editorial-shadow) / 0.32);
+
+    --font-display: "Cormorant Garamond", serif;
+    --font-body: "Montserrat", sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--gold)) hsl(var(--sand-light));
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--sand-light));
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold));
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold-light));
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .bg-sand {
+    background-color: hsl(var(--sand));
+  }
+
+  .bg-sand-light {
+    background-color: hsl(var(--sand-light));
+  }
+
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+
+  .bg-charcoal {
+    background-color: hsl(var(--charcoal));
+  }
+
+  .text-charcoal {
+    color: hsl(var(--charcoal));
+  }
+
+  .text-warm-gray {
+    color: hsl(var(--warm-gray));
+  }
+
+  .border-sand {
+    border-color: hsl(var(--sand));
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px -15px hsl(var(--charcoal) / 0.15);
+  }
+
+  .line-reveal {
+    @apply relative overflow-hidden;
+  }
+
+  .line-reveal::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-px;
+    background-color: hsl(var(--charcoal));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .line-reveal:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+
+  .img-zoom img {
+    @apply transition-transform duration-700 ease-out;
+  }
+
+  .img-zoom:hover img {
+    transform: scale(1.08);
+  }
+
+  .gary-editorial {
+    --editorial-surface: var(--editorial-ivory);
+    position: relative;
+    isolation: isolate;
+    background: hsl(var(--editorial-surface));
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.22);
+  }
+  .gary-editorial-linen {
+    --editorial-surface: var(--editorial-linen);
+  }
+  .gary-editorial::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='currentColor' filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  }
+  .gary-editorial .editorial-section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gary-editorial .editorial-section-photo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vw;
+    max-height: 560px;
+    min-width: 0;
+    background: hsl(var(--editorial-surface));
+  }
+  .gary-editorial .editorial-section-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  /* Fade the empty inner gutter, not the photograph or footwear. */
+  .gary-editorial .editorial-section-photo::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+    width: 12%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--editorial-surface) / 0.12) 35%,
+      hsl(var(--editorial-surface) / 0.55) 72%,
+      hsl(var(--editorial-surface))
+    );
+    display: none;
+  }
+  .gary-editorial .editorial-section-content {
+    position: relative;
+    min-width: 0;
+    align-self: center;
+    padding: 40px 24px 48px;
+  }
+  .editorial-numeral {
+    position: absolute;
+    right: 24px;
+    top: 8px;
+    font-family: var(--font-display);
+    font-size: 160px;
+    line-height: 1;
+    color: hsl(var(--editorial-gold) / 0.055);
+    pointer-events: none;
+  }
+  .editorial-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 24px;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-gold));
+  }
+  .editorial-eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: hsl(var(--editorial-gold) / 0.6);
+    flex-shrink: 0;
+  }
+  .editorial-heading-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .editorial-heading {
+    position: relative;
+    margin: 0;
+    font-size: 42px;
+    line-height: 1.05;
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  .editorial-heading em {
+    color: hsl(var(--editorial-gold));
+    font-weight: 400;
+  }
+  .editorial-subtitle {
+    margin: 16px 0 32px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: hsl(var(--editorial-ink));
+  }
+  .gary-editorial .editorial-text-link {
+    position: relative;
+    height: auto;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 0;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-gold));
+    text-decoration: none;
+  }
+  .editorial-text-link::after,
+  .editorial-caption::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    background: hsl(var(--editorial-gold) / 0.55);
+    transform: scaleX(0.25);
+    transform-origin: left;
+    transition: transform 450ms ease-out;
+  }
+  .editorial-text-link:hover::after,
+  .editorial-caption:hover::after,
+  .editorial-preview:hover .editorial-caption::after {
+    transform: scaleX(1);
+  }
+  .editorial-text-link svg,
+  .editorial-discover svg {
+    transition: transform 450ms ease-out;
+  }
+  .editorial-text-link:hover svg,
+  .editorial-discover:hover svg {
+    transform: translateX(3px);
+  }
+  .editorial-previews {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .gary-editorial .editorial-pedestal {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    padding: 12%;
+    border: 1px solid hsl(var(--editorial-gold) / 0.2);
+    border-radius: 3px;
+    background: var(--editorial-tile-light);
+    box-shadow: var(--editorial-tile-shadow);
+    overflow: visible;
+    transition:
+      transform 450ms ease-out,
+      box-shadow 450ms ease-out;
+  }
+  .editorial-pedestal::before {
+    content: "";
+    position: absolute;
+    bottom: 14%;
+    left: 23%;
+    width: 54%;
+    height: 5%;
+    border-radius: 50%;
+    background: hsl(var(--editorial-shadow) / 0.12);
+    filter: blur(7px);
+    pointer-events: none;
+  }
+  .gary-editorial .editorial-pedestal img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    transition: transform 450ms ease-out;
+  }
+  .editorial-pedestal:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--editorial-tile-shadow-hover);
+  }
+  .editorial-pedestal:hover img {
+    transform: scale(1.035);
+  }
+  .editorial-caption {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 0 12px;
+    font-size: 9px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-align: center;
+    color: hsl(var(--editorial-ink));
+    overflow-wrap: anywhere;
+  }
+  .editorial-caption::after {
+    left: 35%;
+    width: 30%;
+    bottom: 4px;
+  }
+  .editorial-category-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.2);
+  }
+  .gary-editorial a:focus-visible {
+    outline: 2px solid hsl(var(--editorial-gold));
+    outline-offset: 5px;
+  }
+  .gary-editorial .editorial-section-photo-family {
+    padding: 28px 36px;
+  }
+  .gary-editorial .editorial-section-photo-family img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    border: 8px solid hsl(var(--cream));
+    box-shadow: var(--editorial-frame-shadow);
+    transform: rotate(-1.3deg);
+  }
+  .editorial-family-body {
+    max-width: 480px;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: hsl(var(--editorial-ink));
+  }
+  .editorial-quote {
+    max-width: 480px;
+    margin: 28px 0 32px;
+    padding-left: 22px;
+    border-left: 1px solid hsl(var(--editorial-gold) / 0.65);
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.4;
+    font-style: italic;
+    color: hsl(var(--editorial-ink));
+  }
+  .editorial-family-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .gary-editorial .editorial-discover {
+    height: 48px;
+    border-radius: 2px;
+    border-color: hsl(var(--editorial-gold) / 0.5);
+    background: transparent;
+    font-size: 10px;
+    padding: 0 22px;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-ink));
+  }
+  .gary-editorial .editorial-discover:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  .editorial-est {
+    color: hsl(var(--editorial-gold));
+    font-size: 10px;
+    text-transform: uppercase;
+    border-block: 1px solid hsl(var(--editorial-gold) / 0.3);
+    padding: 9px 0;
+  }
+  @media (min-width: 768px) {
+    .gary-editorial .editorial-section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: 640px;
+    }
+    .gary-editorial .editorial-section-photo {
+      order: 2;
+      height: 100%;
+      max-height: none;
+      padding: 0;
+    }
+    .gary-editorial .editorial-section-photo img {
+      position: absolute;
+      right: 0;
+      width: 90%;
+      height: 100%;
+    }
+    .gary-editorial .editorial-section-photo::after {
+      display: block;
+      right: auto;
+      left: 0;
+      transform: rotate(180deg);
+    }
+    .gary-editorial .editorial-section-content {
+      order: 1;
+      padding: 64px 28px;
+    }
+    .gary-editorial .editorial-section-grid-photo-left .editorial-section-photo {
+      order: 1;
+    }
+    .gary-editorial .editorial-section-grid-photo-left .editorial-section-photo img {
+      right: auto;
+      left: 0;
+    }
+    .gary-editorial .editorial-section-grid-photo-left .editorial-section-content {
+      order: 2;
+    }
+    .gary-editorial .editorial-section-grid-photo-left .editorial-section-photo::after {
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+    .editorial-heading {
+      font-size: 48px;
+    }
+    .editorial-heading-row {
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+    .editorial-subtitle {
+      margin-bottom: 32px;
+    }
+    .editorial-previews {
+      gap: 16px;
+    }
+    .gary-editorial .editorial-section-photo-family img {
+      position: relative;
+      right: auto;
+      left: auto;
+      width: auto;
+      max-width: 76%;
+      height: auto;
+      max-height: 84%;
+    }
+    .editorial-numeral {
+      top: 32px;
+      font-size: 200px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .gary-editorial .editorial-section-grid {
+      min-height: 730px;
+    }
+    .gary-editorial .editorial-section-content {
+      padding: 80px 48px;
+    }
+    .editorial-heading {
+      font-size: 60px;
+    }
+    .editorial-subtitle {
+      font-size: 25px;
+      margin: 20px 0 40px;
+    }
+    .editorial-previews {
+      gap: 20px;
+    }
+    .editorial-family-body {
+      font-size: 15px;
+    }
+    .editorial-quote {
+      font-size: 30px;
+    }
+    .editorial-numeral {
+      font-size: 240px;
+    }
+  }
+  @media (max-width: 420px) {
+    .editorial-heading-row {
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .editorial-previews {
+      gap: 12px;
+    }
+    .gary-editorial .editorial-section-content {
+      padding-inline: 20px;
+    }
+  }
+  /* Mobile: photo becomes the section background, text overlays it. */
+  @media (max-width: 767px) {
+    .gary-editorial .editorial-section-grid {
+      position: relative;
+      display: block;
+      min-height: 88vh;
+    }
+    .gary-editorial .editorial-section-photo {
+      position: absolute;
+      inset: 0;
+      height: auto;
+      max-height: none;
+      display: block;
+    }
+    .gary-editorial .editorial-section-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 62%;
+    }
+    .gary-editorial .editorial-section-photo::after {
+      display: block;
+      inset: 0;
+      width: 100%;
+      transform: none;
+      background: linear-gradient(
+        to top,
+        hsl(var(--editorial-surface) / 0.97) 12%,
+        hsl(var(--editorial-surface) / 0.85) 30%,
+        hsl(var(--editorial-surface) / 0.3) 52%,
+        hsl(var(--editorial-surface) / 0.05) 72%,
+        transparent
+      );
+    }
+    .gary-editorial .editorial-section-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 88vh;
+      padding: 48px 24px 44px;
+    }
+    .gary-editorial .editorial-numeral {
+      display: none;
+    }
+  }
+  /* Corrections: black text, flush full-bleed photos. */
+  .gary-editorial {
+    border-top: 0;
+  }
+  .gary-editorial + .gary-editorial .editorial-section-content {
+    box-shadow: inset 0 1px 0 hsl(var(--editorial-gold) / 0.22);
+  }
+  .gary-editorial,
+  .gary-editorial .editorial-eyebrow,
+  .gary-editorial .editorial-heading,
+  .gary-editorial .editorial-heading em,
+  .gary-editorial .editorial-subtitle,
+  .gary-editorial .editorial-text-link,
+  .gary-editorial .editorial-caption,
+  .gary-editorial .editorial-family-body,
+  .gary-editorial .editorial-quote,
+  .gary-editorial .editorial-discover,
+  .gary-editorial .editorial-est,
+  .gary-editorial .editorial-preview span {
+    color: #111;
+  }
+  .gary-editorial .editorial-eyebrow::before,
+  .gary-editorial .editorial-text-link::after,
+  .gary-editorial .editorial-caption::after {
+    background: #111;
+  }
+  .gary-editorial .editorial-numeral {
+    color: rgb(17 17 17 / 0.04);
+  }
+  .gary-editorial .editorial-section-grid {
+    align-items: stretch;
+  }
+  .gary-editorial .editorial-section-photo,
+  .gary-editorial .editorial-section-photo-family {
+    display: block;
+    height: 70vw;
+    max-height: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: transparent;
+    align-self: stretch;
+  }
+  .gary-editorial .editorial-section-photo img,
+  .gary-editorial .editorial-section-photo-family img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 60%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: scale(1.08);
+  }
+  .gary-editorial[id*="boot"] .editorial-section-photo img,
+  .gary-philosophy .editorial-section-photo img {
+    object-position: center bottom;
+  }
+  .gary-editorial .editorial-section-photo::after {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .gary-editorial .editorial-section-grid {
+      min-height: 0;
+    }
+    .gary-editorial .editorial-section-photo,
+    .gary-editorial .editorial-section-photo-family {
+      height: auto;
+      min-height: 100%;
+    }
+    .gary-editorial .editorial-section-photo img,
+    .gary-editorial .editorial-section-photo-family img {
+      right: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .gary-editorial .editorial-section-content {
+      padding: 72px 28px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .gary-editorial .editorial-section-content {
+      padding: 104px 48px;
+    }
+  }
+  @media (max-width: 767px) {
+    .gary-editorial .editorial-section-photo,
+    .gary-editorial .editorial-section-photo-family {
+      height: auto;
+      min-height: 0;
+    }
+    /* Show the whole photo uncropped at the top; fade blends it into the text below. */
+    .gary-editorial .editorial-section-photo {
+      top: 0;
+      bottom: auto;
+      overflow: visible;
+    }
+    .gary-editorial .editorial-section-photo img {
+      position: static;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center top;
+      transform: none;
+    }
+    .gary-editorial .editorial-section-photo::after {
+      display: none;
+    }
+    .gary-editorial .editorial-section-grid::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        hsl(var(--editorial-surface) / 0.98) 34%,
+        hsl(var(--editorial-surface) / 0.88) 46%,
+        hsl(var(--editorial-surface) / 0.45) 58%,
+        hsl(var(--editorial-surface) / 0.08) 68%,
+        transparent 76%
+      );
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .gary-editorial.reveal-ready:not(.is-revealed) .editorial-section-content {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .gary-editorial.reveal-ready:not(.is-revealed) .editorial-section-photo {
+      opacity: 0;
+    }
+    .gary-editorial .editorial-section-content,
+    .gary-editorial .editorial-section-photo {
+      transition:
+        opacity 900ms ease-out,
+        transform 900ms ease-out;
+    }
+    .gary-editorial.is-revealed .editorial-preview {
+      animation: editorial-reveal 800ms ease-out both;
+    }
+    .gary-editorial.is-revealed .editorial-preview:nth-child(2) {
+      animation-delay: 100ms;
+    }
+    .gary-editorial.is-revealed .editorial-preview:nth-child(3) {
+      animation-delay: 200ms;
+    }
+    .gary-editorial.is-revealed .editorial-section-photo img {
+      animation: editorial-breathe 24s ease-in-out infinite alternate;
+    }
+    @keyframes editorial-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes editorial-breathe {
+      from {
+        transform: scale(1.08);
+      }
+      to {
+        transform: scale(1.12);
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gary-editorial *,
+    .gary-editorial *::before,
+    .gary-editorial *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .editorial-pedestal:hover,
+    .editorial-pedestal:hover img,
+    .editorial-text-link:hover svg,
+    .editorial-discover:hover svg {
+      transform: none;
+    }
+  }
+
+  /* After Dark: keep both heels fully in frame (no zoom, anchored to the shoes). */
+  #after-dark .editorial-section-photo img {
+    transform: none !important;
+    animation: none !important;
+    object-position: 68% 100%;
+  }
+
+  /* Refinements: After Dark, Office Picks, Philosophy. */
+  #after-dark .editorial-section-content,
+  #office-edit .editorial-section-content,
+  .gary-philosophy .editorial-section-content {
+    isolation: isolate;
+  }
+  #after-dark .editorial-heading em,
+  #office-edit .editorial-heading em,
+  .gary-philosophy .editorial-heading em {
+    color: hsl(var(--editorial-gold));
+  }
+  #after-dark .editorial-eyebrow,
+  #office-edit .editorial-eyebrow,
+  .gary-philosophy .editorial-eyebrow {
+    letter-spacing: 0.32em;
+    font-weight: 500;
+  }
+  #after-dark .editorial-eyebrow::before,
+  #office-edit .editorial-eyebrow::before,
+  .gary-philosophy .editorial-eyebrow::before {
+    width: 40px;
+    background: hsl(var(--editorial-gold));
+  }
+  #after-dark .editorial-subtitle,
+  #office-edit .editorial-subtitle {
+    position: relative;
+    padding-bottom: 24px;
+  }
+  #after-dark .editorial-pedestal,
+  #office-edit .editorial-pedestal {
+    border-color: hsl(var(--editorial-gold) / 0.3);
+    border-radius: 2px;
+  }
+  #after-dark .editorial-text-link,
+  #office-edit .editorial-text-link {
+    letter-spacing: 0.24em;
+  }
+  .gary-philosophy .editorial-quote {
+    border-left: 2px solid hsl(var(--editorial-gold));
+    background: linear-gradient(90deg, hsl(var(--editorial-gold) / 0.07), transparent 80%);
+    padding: 14px 0 14px 22px;
+  }
+  .gary-philosophy .editorial-family-body::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 3.4em;
+    line-height: 0.85;
+    padding: 4px 10px 0 0;
+    color: hsl(var(--editorial-gold));
+  }
+  .gary-philosophy .editorial-discover {
+    letter-spacing: 0.24em;
+    border-color: #111;
+  }
+  .gary-philosophy .editorial-est {
+    letter-spacing: 0.3em;
+    border-color: hsl(var(--editorial-gold) / 0.5);
+  }
+
+  @media (max-width: 767px) {
+    #after-dark .editorial-section-content::before,
+    #office-edit .editorial-section-content::before,
+    .gary-philosophy .editorial-section-content::before {
+      display: none;
+    }
+  }
+  /* Plain square product tiles. */
+  .editorial-plain-tile {
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .editorial-plain-tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 450ms ease-out;
+  }
+  #boots-edit .editorial-plain-tile--fallback img {
+    object-fit: cover;
+  }
+  .editorial-plain-tile:hover img {
+    transform: scale(1.03);
+  }
+  .editorial-plain-tile:focus-visible {
+    outline: 2px solid hsl(var(--editorial-gold));
+    outline-offset: 4px;
+  }
+  #after-dark .editorial-subtitle,
+  #office-edit .editorial-subtitle {
+    padding-bottom: 0;
+  }
+  /* Boots: the whole photograph runs full width, undistorted, nothing cropped;
+     the copy floats on the photograph in a frosted cream panel. */
+  #boots-edit .editorial-section-grid {
+    display: block;
+    min-height: 0;
+    position: relative;
+  }
+  #boots-edit .editorial-section-photo {
+    display: block;
+    position: relative;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+  }
+  #boots-edit .editorial-section-photo::after {
+    display: none;
+  }
+  #boots-edit .editorial-section-photo img {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    transform: none;
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  #boots-edit .editorial-numeral {
+    display: none;
+  }
+  #boots-edit .editorial-section-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: clamp(16px, 4vw, 56px);
+    pointer-events: none;
+  }
+  #boots-edit .editorial-section-content > * {
+    pointer-events: auto;
+  }
+  #boots-edit .editorial-heading-row,
+  #boots-edit .editorial-eyebrow,
+  #boots-edit .editorial-subtitle,
+  #boots-edit .editorial-previews,
+  #boots-edit .editorial-category-links {
+    width: min(400px, 44%);
+    background: hsl(var(--editorial-ivory) / 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding-inline: clamp(18px, 2.4vw, 32px);
+  }
+  #boots-edit .editorial-eyebrow {
+    padding-top: clamp(16px, 2vw, 28px);
+    margin-bottom: 0;
+  }
+  #boots-edit .editorial-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  #boots-edit .editorial-subtitle {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 4px;
+  }
+  #boots-edit .editorial-previews {
+    padding-top: 16px;
+    padding-bottom: 4px;
+    gap: 10px;
+  }
+  #boots-edit .editorial-category-links {
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: clamp(16px, 2vw, 28px);
+  }
+  #boots-edit .editorial-eyebrow {
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.4);
+  }
+  @media (max-width: 767px) {
+    #boots-edit .editorial-section-grid {
+      min-height: 0;
+    }
+    #boots-edit .editorial-section-photo {
+      position: relative;
+      inset: auto;
+    }
+    #boots-edit .editorial-section-photo img {
+      position: static;
+      inset: auto;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center top;
+    }
+    #boots-edit .editorial-section-grid::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        hsl(var(--editorial-surface) / 0.98) 34%,
+        hsl(var(--editorial-surface) / 0.88) 46%,
+        hsl(var(--editorial-surface) / 0.45) 58%,
+        hsl(var(--editorial-surface) / 0.08) 68%,
+        transparent 76%
+      );
+    }
+    #boots-edit .editorial-section-content {
+      position: relative;
+      align-items: stretch;
+      justify-content: flex-end;
+      padding: 12px;
+      min-height: 0;
+      margin-top: -8%;
+    }
+    #boots-edit .editorial-heading-row,
+    #boots-edit .editorial-eyebrow,
+    #boots-edit .editorial-subtitle,
+    #boots-edit .editorial-previews,
+    #boots-edit .editorial-category-links {
+      width: 100%;
+    }
+    #boots-edit .editorial-category-links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+    }
+  }
+  /* Seen on @garyshoeslb */
+  .seen-on {
+    background: hsl(var(--editorial-ivory));
+  }
+  .seen-on-head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 3rem;
+  }
+  .seen-on-sub {
+    max-width: 34rem;
+    font-size: 13px;
+    line-height: 1.8;
+    color: hsl(var(--editorial-ink) / 0.7);
+  }
+  .seen-on-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-ink) / 0.6);
+    margin-bottom: 0;
+  }
+  .seen-on-eyebrow::before,
+  .seen-on-eyebrow::after {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+  .seen-on h2 em {
+    color: hsl(var(--editorial-ink));
+    font-style: italic;
+  }
+  .seen-on-link {
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 10px;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 4px;
+  }
+  .seen-on-tile {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid hsl(var(--editorial-gold) / 0.25);
+    padding: 6px;
+    background: hsl(var(--cream));
+    box-shadow: var(--editorial-tile-shadow);
+    transition:
+      transform 450ms ease-out,
+      box-shadow 450ms ease-out;
+  }
+  .seen-on-tile img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter 450ms ease-out;
+  }
+  .seen-on-tile::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid hsl(var(--cream) / 0);
+    transition: border-color 450ms ease-out;
+    pointer-events: none;
+  }
+  .seen-on-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--editorial-tile-shadow-hover);
+  }
+  .seen-on-tile:hover::after {
+    border-color: hsl(var(--cream) / 0.7);
+    inset: 14px;
+  }
+  .seen-on-tile:focus-visible {
+    outline: 2px solid hsl(var(--editorial-gold));
+    outline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seen-on-tile,
+    .seen-on-tile:hover {
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slide-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+@layer components {
+  /* No hairlines on editorial photo edges. */
+  .gary-editorial .editorial-section-photo {
+    border: 0 !important;
+    outline: 0;
+    overflow: hidden;
+    box-shadow: none !important;
+  }
+  .gary-editorial .editorial-section-photo img {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .gary-editorial .editorial-section-photo::before {
+    display: none !important;
+  }
+  .gary-editorial .editorial-section-content::before {
+    display: none !important;
+  }
+
+  /* Instagram post cards — Seen on @garyshoeslb. */
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2.4vw, 36px);
+    align-items: start;
+  }
+  .insta-grid > :nth-child(2) {
+    margin-top: 48px;
+  }
+  .insta-post {
+    display: block;
+    background: hsl(var(--cream));
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 24px 50px -32px hsl(var(--editorial-ink) / 0.45);
+    transition:
+      transform 500ms ease-out,
+      box-shadow 500ms ease-out;
+  }
+  .insta-post:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 34px 60px -30px hsl(var(--editorial-ink) / 0.5);
+  }
+  .insta-post:focus-visible {
+    outline: 2px solid hsl(var(--editorial-ink));
+    outline-offset: 4px;
+  }
+  .insta-post-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .insta-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 2px;
+    background: hsl(var(--cream));
+    box-shadow: 0 0 0 1.5px hsl(var(--editorial-ink) / 0.55);
+  }
+  .insta-username {
+    font-size: 12px;
+    font-weight: 500;
+    color: hsl(var(--editorial-ink));
+  }
+  .insta-glyph {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    color: hsl(var(--editorial-ink) / 0.6);
+    flex-shrink: 0;
+  }
+  .insta-post-photo {
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .insta-post-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms ease-out;
+  }
+  .insta-post:hover .insta-post-photo img {
+    transform: scale(1.05);
+  }
+  .insta-post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px 4px;
+    color: hsl(var(--editorial-ink));
+  }
+  .insta-icons {
+    display: flex;
+    gap: 14px;
+  }
+  .insta-post-actions svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+  }
+  .insta-caption {
+    display: block;
+    padding: 4px 14px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: hsl(var(--editorial-ink) / 0.75);
+  }
+  .insta-caption b {
+    font-weight: 500;
+    color: hsl(var(--editorial-ink));
+    margin-right: 6px;
+  }
+  @media (max-width: 767px) {
+    .insta-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 0 20px 24px;
+      margin: 0 -20px;
+      scrollbar-width: none;
+    }
+    .insta-grid::-webkit-scrollbar {
+      display: none;
+    }
+    .insta-grid > * {
+      flex: 0 0 76%;
+      scroll-snap-align: center;
+    }
+    .insta-grid > :nth-child(2) {
+      margin-top: 0;
+    }
+  }
+  .gary-editorial .editorial-plain-tile,
+  .gary-editorial .editorial-plain-tile img {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Philosophy: quiet, text-only interlude. */
+  .gary-philosophy-text {
+    background: hsl(var(--editorial-linen));
+    padding: 72px 24px;
+    text-align: center;
+  }
+  .philosophy-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .philosophy-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-gold));
+    margin-bottom: 18px;
+  }
+  .philosophy-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.1;
+    color: hsl(var(--editorial-ink));
+  }
+  .philosophy-heading em {
+    color: hsl(var(--editorial-gold));
+  }
+  .philosophy-rule {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: hsl(var(--editorial-gold) / 0.6);
+    margin: 28px 0;
+  }
+  .philosophy-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: hsl(var(--editorial-ink) / 0.75);
+  }
+  .philosophy-quote {
+    margin: 28px 0 24px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.45;
+    color: hsl(var(--editorial-ink));
+  }
+  .gary-philosophy-text .philosophy-link {
+    height: auto;
+    min-height: 44px;
+    padding: 0;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: hsl(var(--editorial-ink));
+  }
+  @media (min-width: 768px) {
+    .gary-philosophy-text {
+      padding: 112px 48px;
+    }
+  }
+}
+
+/* ==========================================================================
+   MOBILE editorial layout v7 (CSS only): After Dark Selection, All About the
+   Boots, Our Office Picks. Everything is inside max-width: 767px, so desktop
+   is untouched. Uses the ORIGINAL HomepageEditorial.tsx.
+
+     [ photo, whole, fading softly into the section background ]
+       01 / THE GARY EDIT
+       Category title
+       View all
+       Subtitle
+       ---------------------
+       SHOP THE EDIT
+       [shoe] [shoe] [shoe]
+   ========================================================================== */
+
+/* safe no-op if an earlier version of the component is still in use */
+.editorial-mobile-photo {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .gary-editorial + .gary-editorial {
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.22);
+  }
+  .gary-editorial + .gary-editorial .editorial-section-content {
+    box-shadow: none;
+  }
+
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-grid {
+    display: block;
+    position: relative;
+    min-height: 0;
+    padding: 0;
+  }
+  /* remove the old cream gradient overlays */
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-grid::after,
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-photo::after,
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-numeral {
+    display: none;
+  }
+
+  /* ---- photo: whole image, no crop, no zoom, soft fade at the bottom ---- */
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-photo {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-photo img {
+    position: static;
+    inset: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    transform: none !important;
+    animation: none !important;
+    /* fade: only the bottom 14% dissolves into the section color.
+       Raise 86% (e.g. 92%) to start the fade lower and keep more of the photo crisp. */
+    -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 86%, transparent 100%);
+  }
+
+  /* ---- text starts on the faded edge of the photo ---- */
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-content {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    display: block;
+    min-height: 0;
+    margin: -6% 0 0;
+    padding: 0 20px 48px;
+    pointer-events: auto;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-section-content > * {
+    pointer-events: auto;
+  }
+
+  /* strip the frosted panels the boots section used */
+  :is(#after-dark, #boots-edit, #office-edit)
+    :is(.editorial-eyebrow, .editorial-heading-row, .editorial-subtitle, .editorial-category-links) {
+    width: auto;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-eyebrow {
+    margin: 0 0 14px;
+    padding: 0;
+    border: 0;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-heading-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-heading {
+    font-size: 36px;
+    line-height: 1.08;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-subtitle {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 20px;
+  }
+
+  /* ---- "Shop the edit" label + three small shoe tiles ---- */
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-previews {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-previews::before {
+    content: none;
+    grid-column: 1 / -1;
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.35);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #111;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-preview {
+    min-width: 0;
+    max-width: none;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-plain-tile {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-plain-tile img {
+    object-fit: contain;
+    object-position: center;
+  }
+  /* boots crop tiles are zoomed crops of the boots photo shown above */
+  #boots-edit .editorial-preview:has(img[style*="object-position"]) {
+    display: none;
+  }
+
+  /* ---- boots category links ---- */
+  :is(#after-dark, #boots-edit, #office-edit) .editorial-category-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 2px 22px;
+    margin-top: 20px;
+    padding: 10px 0 0;
+    border-top: 1px solid hsl(var(--editorial-gold) / 0.2);
+  }
+}
+
+/* Collection navigation shares one row above the products. */
+.gary-editorial .editorial-shop-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 8px;
+  border-top: 1px solid hsl(var(--editorial-ink) / 0.2);
+}
+.editorial-shop-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: hsl(var(--editorial-ink));
+}
+:is(#after-dark, #office-edit, #boots-edit) .editorial-shop-row .editorial-text-link {
+  flex-shrink: 0;
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: hsl(var(--editorial-ink));
+}
+:is(#after-dark, #office-edit, #boots-edit) .editorial-shop-row .editorial-text-link::after {
+  background: hsl(var(--editorial-ink) / 0.55);
+}
+@media (min-width: 768px) {
+  #boots-edit .editorial-shop-row {
+    width: min(400px, 44%);
+    margin-top: 0;
+    padding-inline: clamp(18px, 2.4vw, 32px);
+    background: hsl(var(--editorial-ivory) / 0.82);
+    backdrop-filter: blur(10px);
+  }
+  #boots-edit .editorial-heading-row {
+    padding-top: 24px;
+  }
+}

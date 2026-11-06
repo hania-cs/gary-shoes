@@ -1,0 +1,1 @@
+INSERT INTO public.categories (name, sort_order) VALUES ('Sandals', (SELECT COALESCE(MAX(sort_order),0)+1 FROM public.categories));
